@@ -1,0 +1,23 @@
+# Contexto de build: raíz del repositorio.
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY global.json CajaComun.slnx ./
+COPY src/ src/
+COPY tests/ tests/
+RUN dotnet restore CajaComun.slnx
+RUN dotnet build CajaComun.slnx -c Release --no-restore
+
+# docker build --target test -f infra/Dockerfile.api .
+FROM build AS test
+RUN dotnet test CajaComun.slnx -c Release --no-build
+
+FROM build AS publish
+RUN dotnet publish src/CajaComun.Api -c Release --no-build -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+ENV ASPNETCORE_URLS=http://+:8080
+COPY --from=publish /app .
+USER $APP_UID
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "CajaComun.Api.dll"]

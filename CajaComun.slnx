@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CajaComun.Api/CajaComun.Api.csproj" />
+    <Project Path="src/CajaComun.Application/CajaComun.Application.csproj" />
+    <Project Path="src/CajaComun.Domain/CajaComun.Domain.csproj" />
+    <Project Path="src/CajaComun.Infrastructure/CajaComun.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CajaComun.Tests/CajaComun.Tests.csproj" />
+  </Folder>
+</Solution>
