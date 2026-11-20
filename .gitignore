@@ -19,3 +19,6 @@ dist/
 # Logs y temporales
 *.log
 logs/
+
+# Respaldos de la base de datos
+respaldos/

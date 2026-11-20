@@ -5,7 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: '#E91E63', hover: '#D81B60', pressed: '#C2185B' },
+        // DEFAULT es el rosa de la marca (rellenos, bordes, íconos). solido y texto son versiones un poco más oscuras para que el
+        // texto blanco sobre rosa y el texto rosa sobre blanco lleguen a contraste AA (4.5:1).
+        primary: { DEFAULT: '#E91E63', hover: '#D81B60', pressed: '#C2185B', solido: '#D81B60', texto: '#C2185B' },
         vino: '#880E4F',
         lienzo: '#FFF8FA',
         tinte: '#FCE4EC',

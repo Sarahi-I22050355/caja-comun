@@ -6,10 +6,14 @@ import '@fontsource/plus-jakarta-sans/600.css'
 import '@fontsource/plus-jakarta-sans/700.css'
 import '@fontsource/plus-jakarta-sans/800.css'
 import './index.css'
+import './i18n'
 import App from './App'
+import { iniciarVitals } from './lib/vitals'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
   </StrictMode>,
 )
+
+iniciarVitals()

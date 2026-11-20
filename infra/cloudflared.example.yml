@@ -1,0 +1,15 @@
+# Ejemplo de configuración de cloudflared (Cloudflare Tunnel). No lleva credenciales: copia este archivo a
+# ~/.cloudflared/config.yml (Linux) o %USERPROFILE%\.cloudflared\config.yml (Windows) y reemplaza los valores marcados.
+# Pasos completos en docs/despliegue.md.
+
+# Id del túnel que crea `cloudflared tunnel create caja-comun`
+tunnel: <ID-DEL-TUNEL>
+# Archivo de credenciales que genera ese mismo comando (nunca se versiona)
+credentials-file: <RUTA>/<ID-DEL-TUNEL>.json
+
+ingress:
+  # Una sola URL pública para toda la aplicación: nginx sirve React y reenvía /api a la API.
+  - hostname: caja.<TU-DOMINIO>
+    service: http://localhost:8080
+  # Regla final obligatoria: todo lo demás responde 404.
+  - service: http_status:404

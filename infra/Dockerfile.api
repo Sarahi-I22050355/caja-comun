@@ -4,12 +4,16 @@ WORKDIR /src
 COPY global.json CajaComun.slnx ./
 COPY src/ src/
 COPY tests/ tests/
+COPY db/ db/
+COPY docs/consultas-parte2.sql docs/consultas-parte2-mariadb.sql docs/
 RUN dotnet restore CajaComun.slnx
 RUN dotnet build CajaComun.slnx -c Release --no-restore
 
 # docker build --target test -f infra/Dockerfile.api .
+# Las pruebas de integración (Category=Integracion) levantan contenedores y necesitan acceso a Docker: no corren
+# durante el build; las ejecuta scripts/test-integracion.ps1 con el socket de Docker montado.
 FROM build AS test
-RUN dotnet test CajaComun.slnx -c Release --no-build
+RUN dotnet test CajaComun.slnx -c Release --no-build --filter "Category!=Integracion"
 
 FROM build AS publish
 RUN dotnet publish src/CajaComun.Api -c Release --no-build -o /app
